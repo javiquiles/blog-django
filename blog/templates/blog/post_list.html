@@ -1,23 +1,33 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>JaviBlog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
-        <div>
+        <div class="header">
             <h1><a href="">El Blog de Javi</a></h1>
         </div>
 
-        <div>
-            <p>published: 07.04.2017, 10:14</p>
-            <h2><a href="">Mi Primer Post</a></h2>
-            <p>Este es mi primer post</p>
-        </div>
-
-        <div>
-            <p>published: 10.04.2017, 12:14</p>
-            <h2><a href="">Mi Segundo Post</a></h2>
-            <p>Este es mi segundo post</p>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% for post in posts %}
+                        <div class="post">
+                            <div class="date">
+                                {{ post.published_date }}
+                            </div>
+                            <h1><a href="">{{ post.title }}</a></h1>
+                            <p>{{ post.text|linebreaksbr }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </body>
 </html>
